@@ -32,12 +32,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 
 	enc_passwd := util.Sha1([]byte(password+pwd_salt))
 	if db.UserSignup(username,enc_passwd) {
-		resp := util.RespMsg{
-			Code: 200,
-			Msg:  "OK",
-			Data: "SUCCESS",
-		}
-		w.Write(resp.JSONBytes())
+		w.Write([]byte("SUCCESS"))
 	} else {
 		w.Write([]byte("FAILED"))
 	}
@@ -84,7 +79,7 @@ func SigninHandler(w http.ResponseWriter, r *http.Request) {
 			Username string
 			Token string
 		}{
-			Location:"../main/main",
+			Location:"/home",
 			Username:username,
 			Token:token,
 		},
